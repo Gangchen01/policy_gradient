@@ -8,7 +8,7 @@ import random
 import time
 
 import numpy as np
-NUM_EPOCHS = 1000
+NUM_EPOCHS = 2000
 GAMMA = 0.99
 
 no_of_actions=2 #find depeding on which environment it is
@@ -18,7 +18,7 @@ index_list=[0]
 reward_list = [0]
 
 # reproducible
-np.random.seed(1)
+np.random.seed(1234)
 
 if __name__=="__main__":
 	
@@ -54,7 +54,7 @@ if __name__=="__main__":
 		observation_old = env.reset()
 		T=[]
 		tot_reward = 0
-		for _ in range(400):
+		for k in range(1000):
 			#env.render()
 			observation_old = np.reshape(observation_old,(1,4))
 			action_prob = actor.act(observation_old)
@@ -82,7 +82,7 @@ if __name__=="__main__":
 						time.sleep(0.01)
 					
 				break
-		print "Episode:",i,"epsilon:",epsilon,"Total Reward : ",tot_reward		
+		print "Episode:",i,"rollout length:",k,"Total Reward : ",tot_reward		
 		#print T
 		rewardList.append(tot_reward)
 

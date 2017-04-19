@@ -50,7 +50,7 @@ class Actor:
 
 		self.advantages = tf.placeholder(tf.float32,[None,1])
 
-		good_probabilities = tf.reduce_sum(tf.mul(self.out_layer, self.actions),reduction_indices=[1])
+		good_probabilities = tf.reduce_sum(tf.multiply(self.out_layer, self.actions),reduction_indices=[1])
 
 		log_probabilities = tf.log(tf.clip_by_value(good_probabilities, 1e-10, 1.0))
 
@@ -58,7 +58,7 @@ class Actor:
 
 		self.loss = -tf.reduce_sum(eligibility)
 
-		self.optimizer = tf.train.AdamOptimizer(0.001).minimize(self.loss)
+		self.optimizer = tf.train.AdamOptimizer(0.0001).minimize(self.loss)
 
 
 		#Initialize Variables
